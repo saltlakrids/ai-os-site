@@ -10,7 +10,7 @@
   <main>
     <p><a href="./">AI OS</a></p>
     <h1>Privacy policy</h1>
-    <p class="meta">Last updated: 27 October 2026 (Zoho Mail added)</p>
+    <p class="meta">Last updated: 27 October 2026 (saving a message to notes)</p>
 
     <h2>Who this applies to</h2>
     <p>AI OS is a private, single-user application. Its only user is its owner, who also runs it: on their own computer and in their own database project. No one else can sign up.</p>
@@ -18,7 +18,7 @@
     <h2>Google user data AI OS accesses</h2>
     <ul>
       <li><strong>Google Calendar, read-only</strong> (<code>https://www.googleapis.com/auth/calendar.readonly</code>): calendar events such as title, start and end time, location and status, to show the owner's agenda on their dashboard.</li>
-      <li><strong>Gmail, read-only</strong> (<code>https://www.googleapis.com/auth/gmail.readonly</code>): for messages from the last 30 days, the sender, recipients, subject, date, Gmail's short preview (snippet), labels and a link to the message, to show the owner's mail in their inbox and sort it by what needs attention. <strong>Message bodies are not stored</strong>: a body is fetched from Gmail only when the owner opens a message in AI OS or chooses to save it to their notes.</li>
+      <li><strong>Gmail, read-only</strong> (<code>https://www.googleapis.com/auth/gmail.readonly</code>): for messages from the last 30 days, the sender, recipients, subject, date, Gmail's short preview (snippet), labels and a link to the message, to show the owner's mail in their inbox and sort it by what needs attention. <strong>Message bodies are not synced or stored</strong>, except for a message the owner explicitly saves to their notes in AI OS ("Save to Second Brain", one message at a time): that message's text is then fetched from Gmail once and kept as a note.</li>
       <li><strong>Email address</strong> (<code>openid</code>, <code>userinfo.email</code>): to show which Google account is connected.</li>
     </ul>
     <p>AI OS does not send, change, label or delete email, does not create, change or delete calendar events, and does not access contacts or any other Google data. Calendar and Gmail are connected separately; each can be disconnected on its own.</p>
@@ -28,16 +28,17 @@
     <ul>
       <li><strong>Mail account</strong> (<code>ZohoMail.accounts.READ</code>): the account's email address, to show which mailbox is connected.</li>
       <li><strong>Folders</strong> (<code>ZohoMail.folders.READ</code>): the folder list, to find the Inbox and Sent folders.</li>
-      <li><strong>Messages</strong> (<code>ZohoMail.messages.READ</code>): for messages from the last 30 days in the Inbox and Sent folders, the sender, recipients, subject, date, Zoho's short preview, flag, thread and a link to the message, for the same inbox as above. <strong>Message bodies are not stored</strong>: a body is fetched from Zoho only when the owner opens a message in AI OS or chooses to save it to their notes.</li>
+      <li><strong>Messages</strong> (<code>ZohoMail.messages.READ</code>): for messages from the last 30 days in the Inbox and Sent folders, the sender, recipients, subject, date, Zoho's short preview, flag, thread and a link to the message, for the same inbox as above. <strong>Message bodies are not synced or stored</strong>, except for a message the owner explicitly saves to their notes in AI OS ("Save to Second Brain", one message at a time): that message's text is then fetched from Zoho once and kept as a note.</li>
     </ul>
     <p>AI OS does not send, change, move, flag or delete email in Zoho Mail, and does not access any other Zoho data.</p>
 
     <h2>How the data is used</h2>
-    <p>Only to show the owner their own calendar and mail (Google and Zoho) inside AI OS (an agenda, and an inbox that sorts items into categories such as urgent or requires action, with the reason shown). Sorting uses fixed rules inside AI OS. The data is not sold, not shared with third parties, not used for advertising, and not used to train AI models.</p>
+    <p>Only to show the owner their own calendar and mail (Google and Zoho) inside AI OS (an agenda, and an inbox that sorts items into categories such as urgent or requires action, with the reason shown). Sorting uses fixed rules inside AI OS. Messages the owner saves to their notes are indexed so the owner can search them and ask questions about their own notes; this uses an AI model that runs on the owner's own computer, and message content is never sent to an external AI service. The data is not sold, not shared with third parties, not used for advertising, and not used to train AI models.</p>
 
     <h2>Where the data is stored and how it is protected</h2>
     <ul>
       <li>Synced calendar events and mail metadata (as listed above, without message bodies) are stored in the owner's own database (a Supabase project hosted in the European Union, Ireland) and are only readable by the owner's account.</li>
+      <li>Messages the owner saved to their notes (subject, sender, recipients, date, the message text and a link to the original) are stored in the same database and file storage, readable only by the owner's account.</li>
       <li>Google and Zoho access tokens are stored encrypted (Supabase Vault). They are used only by the owner's AI OS server process and are never shown in the browser or written to logs.</li>
       <li>Connections to Google, to Zoho and to the database use encrypted HTTPS/TLS.</li>
       <li>Database backups are kept on the owner's own computer and deleted after 14 days.</li>
@@ -46,7 +47,7 @@
     <h2>Keeping and deleting data</h2>
     <ul>
       <li>Calendar data is kept while the Calendar connection exists. Mail metadata covers a rolling window of the last 30 days; older messages are removed.</li>
-      <li>Disconnecting Calendar, Gmail or Zoho Mail in AI OS deletes that connection's stored access token and its synced data. Copies in backups disappear when those backups are deleted (after 14 days).</li>
+      <li>Disconnecting Calendar, Gmail or Zoho Mail in AI OS deletes that connection's stored access token and its synced data. Messages the owner explicitly saved to their notes are kept as the owner's notes until the owner deletes them in AI OS. Copies in backups disappear when those backups are deleted (after 14 days).</li>
       <li>Access can also be removed at any time on Google's side: <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>. AI OS then stops syncing and shows the connection as expired. For Zoho Mail, access can be removed under connected apps at <a href="https://accounts.zoho.eu">accounts.zoho.eu</a>.</li>
     </ul>
 
